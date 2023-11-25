@@ -5,12 +5,12 @@ import { StringCodec } from 'nats.ws'
 
 const sc = StringCodec()
 
-interface NatsPageProps {
+interface NatsComponentProps {
   servers: string
   subject?: string
 }
 
-export default function NatsComponent({ servers }: NatsPageProps) {
+export default function NatsComponent({ servers }: NatsComponentProps) {
   const nats = useNats(servers)
   const { lastMsg: all_lastMsg, msgs: all_msgs } = useNatsSubscribe(nats, '>')
   const { lastMsg: foo_lastMsg, msgs: foo_msgs } = useNatsSubscribe(nats, 'foo')
