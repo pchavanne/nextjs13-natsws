@@ -2,7 +2,6 @@
 
 This [Next.js](https://nextjs.org/) project is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and aims to integrate [Nats Websocket](https://github.com/nats-io/nats.ws) with [Next.js 13](https://nextjs.org/).
 
-
 ## Getting Started
 
 Before running this project, make sure you have a working NATS server and set up the required environment variables.
@@ -15,20 +14,25 @@ Create a `.env` file in the root of your project with the following content:
 NATS_SERVERS=<your_nats_server_address>
 ```
 
-Then, run the development server:
+Then, run the preview server:
 
 ```bash
-npm run dev
+npm run preview
 # or
-yarn dev
+yarn preview
 # or
-pnpm dev
+pnpm preview
 # or
-bun dev
+bun preview
 ```
+
+:warning: If you run the **dev server** you will [receive every message twice](https://beta-reactjs-org-git-effects-fbopensource.vercel.app/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start sending messages with [Nats CLI](https://github.com/nats-io/natscli)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+nats pub foo "Message N°{{.Count}} on foo" --count=10 --sleep=250ms &
+nats pub bar "Message N°{{.Count}} on bar" --count=10 --sleep=250ms &
+```
